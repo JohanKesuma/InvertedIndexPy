@@ -1,4 +1,8 @@
+from operator import attrgetter
+
 from model.document import *
+from model.inverted_index import InvertedIndex
+from model.term import Term
 
 if __name__ == "__main__":
     document = []
@@ -8,22 +12,40 @@ if __name__ == "__main__":
         Document("2", "Indonesia Merupakan Negara Yang Mempunyai Banyak Candi"))
     document.append(Document("3", "Liburan di Negara Berkembang"))
 
+    # iterate doc
     doc = Document()
-
     for doc in document:
-        print(doc.docId + " -> " + doc.content)
+        print(doc.docId + " -> " + doc.content) # menampilkan konten dokumen
+    # end iterate
+
+
 
     print("=======")
     print("Terms : ")
+    print()
 
-    terms = []
+    # # isi list term
+    # tempTerms = []
+    # for doc in document:
+    #     docTerm = doc.content.split(" ")
+    #     for t in docTerm:
+    #         term = Term(t, doc)
+    #         tempTerms.append(term)
+    # # end
 
-    for doc in document:
-        docTerm = doc.content.split(" ")
-        for term in docTerm:
-            terms.append(term)
+    # # menampilkan semua object term
+    # for t in tempTerms:
+    #     print(t)
+    # # end
 
-    terms = sorted(terms)
+    # tempTerms.sort(key = attrgetter('term'))
 
-    for i in range(len(terms)):
-        print(str(terms[i]).lower())
+    # print('========')
+    # print('sorted')
+    # print('')
+
+    # for t in tempTerms:
+    #     print(t)
+
+    iIndex = InvertedIndex.toInvertedIndex(document)
+    print(iIndex)
