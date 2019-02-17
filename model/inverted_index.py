@@ -1,8 +1,9 @@
 from operator import attrgetter
 
 from model.document import Document
-from model.term import *
-from model.posting import *
+from model.term import TempTerm
+from model.term import Term
+from model.posting import Posting
 import copy
 
 

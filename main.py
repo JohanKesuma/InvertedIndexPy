@@ -1,8 +1,7 @@
 from operator import attrgetter
 
-from model.document import *
+from model.document import Document
 from model.inverted_index import InvertedIndex
-from model.term import Term
 
 if __name__ == "__main__":
     document = []
