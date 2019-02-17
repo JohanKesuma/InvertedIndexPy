@@ -15,37 +15,12 @@ if __name__ == "__main__":
     # iterate doc
     doc = Document()
     for doc in document:
-        print(doc.docId + " -> " + doc.content) # menampilkan konten dokumen
+        print(doc.docId + " -> " + doc.content)  # menampilkan konten dokumen
     # end iterate
-
-
 
     print("=======")
     print("Terms : ")
     print()
-
-    # # isi list term
-    # tempTerms = []
-    # for doc in document:
-    #     docTerm = doc.content.split(" ")
-    #     for t in docTerm:
-    #         term = Term(t, doc)
-    #         tempTerms.append(term)
-    # # end
-
-    # # menampilkan semua object term
-    # for t in tempTerms:
-    #     print(t)
-    # # end
-
-    # tempTerms.sort(key = attrgetter('term'))
-
-    # print('========')
-    # print('sorted')
-    # print('')
-
-    # for t in tempTerms:
-    #     print(t)
 
     iIndex = InvertedIndex.toInvertedIndex(document)
     print(iIndex)
