@@ -2,8 +2,13 @@ from model.document import Document
 
 class Posting:
 
-    def __init__(self, document):
+    def __init__(self, term, document):
         self.document = document
+        self.term = term
+
+    def __str__(self):
+        return self.term + ' -> ' + self.document.docId
+
 
 
 class PostingList:
