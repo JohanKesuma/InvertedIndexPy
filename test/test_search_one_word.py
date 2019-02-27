@@ -8,6 +8,7 @@ from model.inverted_index import InvertedIndex
 
 
 if __name__ == "__main__":
+
     doc1 = Document(
         "1", "Candi Prambanan merupakan salah satu candi yang ada di Indonesia")
     doc2 = Document(
@@ -21,5 +22,7 @@ if __name__ == "__main__":
     invertedIndex.addNewDocument(doc3)
 
     invertedIndex.makeDictionary()
+    posting = invertedIndex.searchOneWord('Indonesia')
 
-    print(invertedIndex)
+    for x in posting:
+        print(x.document.content)

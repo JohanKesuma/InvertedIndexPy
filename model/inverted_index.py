@@ -9,8 +9,9 @@ import copy
 class InvertedIndex(object):
 
     def __init__(self):
-        self.termList = []
-        self.documents = []
+        self.dictionary = [] # list of Term
+
+        self.documents = [] # list of Document
 
     def addNewDocument(self, document):
         self.documents.append(document)
@@ -35,6 +36,20 @@ class InvertedIndex(object):
         postingList.sort(key=attrgetter('term'))
         return postingList
 
+    def searchOneWord(self, word):
+        
+        if len(self.dictionary) == 0:
+            # jika dictionary kosong, return list kosong
+            return [] 
+        else:
+            try:
+                pos = [x.term for x in self.dictionary].index(word.lower())
+                return self.dictionary[pos].postingList.postingList
+            except ValueError:
+                print('data tidak ketemu')
+                return []
+            
+
     def makeDictionary(self):
 
         tempTerms = self.getSortedIndex()
@@ -57,15 +72,22 @@ class InvertedIndex(object):
                 term1.postingList.postingList.append(posting)
             if i < (len(tempTerms) - 1):
                 if tempTerms[i].term != tempTerms[i + 1].term:
-                    self.termList.append(copy.deepcopy(term1))
+                    self.dictionary.append(copy.deepcopy(term1))
                     term1.postingList.postingList.clear()
             else:
-                self.termList.append(copy.deepcopy(term1))
+                self.dictionary.append(copy.deepcopy(term1))
         # end
+
+    def searchWordIndictionary(self, word):
+        for i in range(len(self.dictionary)):
+            if self.dictionary[i].term == word:
+                return i
+        
+        return -1
 
     def __str__(self):
         string = ''
-        for x in self.termList:
+        for x in self.dictionary:
             string += x.__str__()
             string += '\n'
 
