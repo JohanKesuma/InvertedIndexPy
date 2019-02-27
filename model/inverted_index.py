@@ -3,15 +3,16 @@ from operator import attrgetter
 from model.document import Document
 from model.term import Term
 from model.posting import Posting
+from model.search import Search
 import copy
 
 
 class InvertedIndex(object):
 
     def __init__(self):
-        self.dictionary = [] # list of Term
+        self.dictionary = []  # list of Term()
 
-        self.documents = [] # list of Document
+        self.documents = []  # list of Document()
 
     def addNewDocument(self, document):
         self.documents.append(document)
@@ -37,18 +38,19 @@ class InvertedIndex(object):
         return postingList
 
     def searchOneWord(self, word):
-        
+
         if len(self.dictionary) == 0:
             # jika dictionary kosong, return list kosong
-            return [] 
+            return []
         else:
-            try:
-                pos = [x.term for x in self.dictionary].index(word.lower())
+            pos = Search.binarySearch(self.dictionary, word.lower(), 'term')
+            if pos >= 0:
                 return self.dictionary[pos].postingList.postingList
-            except ValueError:
-                print('data tidak ketemu')
-                return []
-            
+            # end if
+
+            # jika data tidak ada maka return list kosong
+            return [] 
+        # end if
 
     def makeDictionary(self):
 
@@ -82,7 +84,7 @@ class InvertedIndex(object):
         for i in range(len(self.dictionary)):
             if self.dictionary[i].term == word:
                 return i
-        
+
         return -1
 
     def __str__(self):

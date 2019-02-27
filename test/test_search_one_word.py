@@ -22,7 +22,7 @@ if __name__ == "__main__":
     invertedIndex.addNewDocument(doc3)
 
     invertedIndex.makeDictionary()
-    posting = invertedIndex.searchOneWord('Indonesia')
+    posting = invertedIndex.searchOneWord('liburan')
 
     for x in posting:
         print(x.document.content)
